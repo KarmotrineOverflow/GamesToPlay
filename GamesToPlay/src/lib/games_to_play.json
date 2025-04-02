@@ -1,0 +1,11 @@
+{
+    "games": [
+        {
+            "id": 0,
+            "title": "Dead Island 2",
+            "game_description": "What the game is about",
+            "reason_to_play": "Why I want to play it",
+            "box_art": "url to game's box art"
+        }
+    ]
+}
