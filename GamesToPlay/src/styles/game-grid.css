@@ -1,6 +1,27 @@
+@keyframes game-grid-load-anim {
+
+    0% {
+        opacity: 0;
+        transform: translateY(80%);
+    }
+
+    100% {
+
+        opacity: 1;
+        transform: translateY(0%);
+    }
+}
+
 .game-grid {
 
+    list-style: none;
+
     display: grid;
-    grid-template-columns: repeat(auto-fit, 400px);
+    grid-template-columns: repeat(auto-fit, minmax(300px, 300px));
+    grid-template-rows: repeat(auto-fit, minmax(300px, 350px));
     grid-auto-flow: row;
+
+    gap: 2rem;
+
+    animation: game-grid-load-anim 0.8s forwards;
 }

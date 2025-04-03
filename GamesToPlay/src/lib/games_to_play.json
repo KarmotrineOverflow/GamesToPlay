@@ -4,7 +4,42 @@
             "id": 0,
             "title": "Dead Island 2",
             "game_description": "What the game is about",
-            "reason_to_play": "Why I want to play it",
+            "thoughts": "Why I want to play it",
+            "box_art": "url to game's box art"
+        },
+        {
+            "id": 1,
+            "title": "Shadow of Mordor",
+            "game_description": "What the game is about",
+            "thoughts": "Why I want to play it",
+            "box_art": "url to game's box art"
+        },
+        {
+            "id": 2,
+            "title": "Evil Within",
+            "game_description": "What the game is about",
+            "thoughts": "Why I want to play it",
+            "box_art": "url to game's box art"
+        },
+        {
+            "id": 3,
+            "title": "Mirror's Edge: Catalyst",
+            "game_description": "What the game is about",
+            "thoughts": "Why I want to play it",
+            "box_art": "url to game's box art"
+        },
+        {
+            "id": 4,
+            "title": "Dishonored 2",
+            "game_description": "What the game is about",
+            "thoughts": "Why I want to play it",
+            "box_art": "url to game's box art"
+        },
+        {
+            "id": 5,
+            "title": "Resident Evil 4 Remake",
+            "game_description": "What the game is about",
+            "thoughts": "Why I want to play it",
             "box_art": "url to game's box art"
         }
     ]

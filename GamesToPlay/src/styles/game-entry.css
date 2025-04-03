@@ -1,0 +1,28 @@
+.game-entry {
+
+    width: 300px;
+    height: 350px;
+
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 6fr 1fr;
+}
+
+.game-box-art {
+
+    background-color: brown;
+}
+
+.game-title {
+
+    margin: auto;
+}
+
+.game-entry:hover {
+
+    transform: translate(-2%, -2%);
+    width: 310px;
+    height: 360px;
+    position: absolute;
+    transition: 0.3s;
+}
