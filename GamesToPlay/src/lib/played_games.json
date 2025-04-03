@@ -1,0 +1,18 @@
+{
+    "games": [
+        {
+            "id": 0,
+            "title": "Resident Evil 2 Remake",
+            "game_description": "Survival horror done right",
+            "thoughts": "Best survival horror game I've played to date! (Sorry, Outlast. You'll still be beloved)",
+            "box_art": "url to game's box art"
+        },
+        {
+            "id": 1,
+            "title": "Days Gone",
+            "game_description": "Biker survival game",
+            "thoughts": "Pretty awesome. Story got me hooked, but gameplay was kind of repetitive. Hordes were the main focus but not enough were shown",
+            "box_art": "url to game's box art"
+        }
+    ]
+}

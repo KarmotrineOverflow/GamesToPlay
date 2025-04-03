@@ -1,0 +1,18 @@
+.about {
+
+    display: flex;
+    flex-direction: column;
+
+    align-content: center;
+    justify-self: center;
+
+    width: 60%;
+
+    text-align: center;
+}
+
+.about img {
+
+    align-self: center;
+    margin-top: 10%;
+}
