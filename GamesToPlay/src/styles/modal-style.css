@@ -1,0 +1,38 @@
+@keyframes modal-boot-anim {
+
+    from {
+        opacity: 0;
+    } to {
+
+        opacity: 1;
+    }
+}
+
+.modal-style {
+
+    position: fixed;
+    z-index: 1000;
+
+    top: 10%;
+    bottom: 10%;
+    left: 20%;
+    right: 20%;
+
+    background-color: white;
+    border-radius: 10px;
+    animation: modal-boot-anim 0.5s forwards;
+}
+
+
+.exit-btn {
+
+    background-color: red;
+
+    width: 30px;
+    height: 30px;
+
+    border-radius: 10px;
+
+    margin: auto;
+    text-align: auto;
+}
