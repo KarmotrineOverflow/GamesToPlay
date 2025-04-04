@@ -1,10 +1,13 @@
 import '../styles/game-entry.css'
 import '../styles/game-grid.css'
 import { useState } from "react";
+import GameModal from './GameModal';
 
 export default function GameGrid(props) {
 
+    var [isOpen, setIsOpen] = useState(false);
     var [gameModal, setGameModal] = useState("");
+    var [gameDetails, setGameDetails] = useState({})
     var gameData = props.gameList
 
     var gameList = gameData["games"].map(game => <li key={game.id} onClick={() => viewGameDetails(game.id)}>
@@ -19,9 +22,16 @@ export default function GameGrid(props) {
         var gameTitle = gameData["games"][gameId].title;
         var gameBoxArt = gameData["games"][gameId].box_art;
         var gameDescription = gameData["games"][gameId].game_description;
-        var reasonToPlay = gameData["games"][gameId].thoughts;
+        var thoughts = gameData["games"][gameId].thoughts;
 
-        setGameModal(<h1>{gameTitle}</h1>)
+        setGameDetails({
+            "title": gameTitle,
+            "desc": gameDescription,
+            "thoughts": thoughts,
+            "box_art": gameBoxArt
+        });
+
+        setIsOpen(true);
     }
 
     return (
@@ -30,9 +40,7 @@ export default function GameGrid(props) {
                 {gameList}
             </ul>
 
-            <div className="game-modal">
-                {gameModal}
-            </div>
+            <GameModal isOpen={isOpen} onClose={() => { setIsOpen(false) }} gameDetails={gameDetails} />
 
         {/* 
             
