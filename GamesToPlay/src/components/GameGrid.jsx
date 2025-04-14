@@ -1,21 +1,26 @@
 import '../styles/game-entry.css'
 import '../styles/game-grid.css'
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import GameModal from './GameModal';
+import { fetchGameBoxArt } from '../scripts/image_services';
 
 export default function GameGrid(props) {
 
     var [isOpen, setIsOpen] = useState(false);
+    var [gameList, setGameList] = useState(null);
     var [gameModal, setGameModal] = useState("");
     var [gameDetails, setGameDetails] = useState({})
-    var gameData = props.gameList
+    var gameData = props.gameList    
 
-    var gameList = gameData["games"].map(game => <li key={game.id} onClick={() => viewGameDetails(game.id)}>
+    useEffect(() => async function () {
+        setGameList(await gameData["games"].map(game => <li key={game.id} onClick={() => viewGameDetails(game.id)}>
         <div className="game-entry">
-            <div className="game-box-art">{game.box_art}</div>
+            <div className="game-box-art"><img width="300px" height="300px" src={fetchGameBoxArt(game.title)} /></div>
             <div className="game-title">{game.title}</div>
         </div>
-    </li>)
+        </li>)) }, 
+        []
+    )
 
     var viewGameDetails = (gameId) => {
 
@@ -37,7 +42,7 @@ export default function GameGrid(props) {
     return (
         <>
             <ul className="game-grid">
-                {gameList}
+                {gameList == null ? <h1>Loading</h1> : gameList}
             </ul>
 
             <GameModal isOpen={isOpen} onClose={() => { setIsOpen(false) }} gameDetails={gameDetails} />
