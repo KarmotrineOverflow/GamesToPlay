@@ -3,16 +3,18 @@ import '../styles/game-grid.css'
 import { useEffect, useState } from "react";
 import GameModal from './GameModal';
 import { fetchGameBoxArt } from '../scripts/image_services';
+import { getGameList, updateGameDetails } from '../scripts/game_list_services';
 
 export default function GameGrid(props) {
 
     var [isOpen, setIsOpen] = useState(false);
-    var [gameList, setGameList] = useState(null);
+    var [gameList, setGameList] = useState([]);
     var [gameModal, setGameModal] = useState("");
     var [gameDetails, setGameDetails] = useState({})
-    var gameData = props.gameList    
+    var gameListType = props.gameListType
+    var gameData; 
 
-    useEffect(() => async function () {
+    /* useEffect(() => async function () {
         setGameList(await gameData["games"].map(game => <li key={game.id} onClick={() => viewGameDetails(game.id)}>
         <div className="game-entry">
             <div className="game-box-art"><img width="300px" height="300px" src={fetchGameBoxArt(game.title)} /></div>
@@ -20,9 +22,45 @@ export default function GameGrid(props) {
         </div>
         </li>)) }, 
         []
+    ) */
+
+    useEffect(() => async () => {  
+
+        await fetchGameList()
+        //await displayGameList()
+     },
+        []
     )
 
-    var viewGameDetails = (gameId) => {
+    const fetchGameList = async function () {
+
+        gameData = await getGameList(gameListType)
+        console.log("TEST")
+    }
+
+    const displayGameList = async function () {
+
+        for (var i = 0; i < gameData["games"].length; i++) {
+
+            if (!gameData["games"][i]["box_art"]) {
+
+                var boxArtURL = await fetchGameBoxArt(gameData["games"][i]["title"]);
+                gameData["games"][i]["box_art"] = boxArtURL.image_url;
+
+                // Update the box art URLs in the database for caching
+                updateGameDetails(gameListType, gameData["games"][i])
+            }          
+        }
+
+        setGameList(gameData["games"].map(game => <li key={game.id} onClick={() => viewGameDetails(game.id)}>
+        <div className="game-entry">
+            <div className="game-box-art"><img src={game.box_art} /></div>
+            <div className="game-title">{game.title}</div>
+        </div>
+        </li>))
+    }
+
+    const viewGameDetails = (gameId) => {
 
         var gameTitle = gameData["games"][gameId].title;
         var gameBoxArt = gameData["games"][gameId].box_art;
@@ -42,7 +80,7 @@ export default function GameGrid(props) {
     return (
         <>
             <ul className="game-grid">
-                {gameList == null ? <h1>Loading</h1> : gameList}
+                {gameList.length == 0 ? <h1>Loading</h1> : gameList}
             </ul>
 
             <GameModal isOpen={isOpen} onClose={() => { setIsOpen(false) }} gameDetails={gameDetails} />

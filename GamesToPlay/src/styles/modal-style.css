@@ -23,16 +23,51 @@
     animation: modal-boot-anim 0.5s forwards;
 }
 
+.modal-header {
+
+    background-color: rgb(178, 178, 178);
+    padding: 15px;
+
+    border-radius: 10px 10px 0px 0px;
+}
+
+.modal-content-container {
+
+    display: flex;
+    padding: 25px;
+    justify-content: space-evenly;
+}
+
+.modal-left-item {
+
+    text-align: center;
+}
+
+.modal-left-item img {
+
+    width: 250px;
+    height: 300px;
+}
 
 .exit-btn {
 
-    background-color: red;
+    background-color: rgb(160, 14, 14);
 
-    width: 30px;
+    width: 50px;
     height: 30px;
 
-    border-radius: 10px;
+    border-radius: 0px 10px 0px 00px;
 
+    position: absolute;
+    right: 0;
+}
+
+.exit-btn p {
+
+    text-align: center;
+    transform: translateY(50%);
     margin: auto;
-    text-align: auto;
+
+    font-weight: bold;
+    color: rgb(255, 255, 255);
 }

@@ -5,7 +5,7 @@ export default function PlayedGames() {
 
    return (
     <>
-        <GameGrid gameList={gameData} />    
+        <GameGrid gameList={gameData} gameListType={"playedgames"}/>    
     </>
    )
 }

@@ -5,7 +5,7 @@ export default function ToPlayGames() {
 
    return (
     <>
-        <GameGrid gameList={gameData} />    
+        <GameGrid gameList={gameData} gameListType={"toplaygames"}/>    
     </>
    )
 }

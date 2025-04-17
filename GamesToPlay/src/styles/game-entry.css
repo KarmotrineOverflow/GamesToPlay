@@ -1,16 +1,20 @@
 .game-entry {
 
-    width: 300px;
+    width: 250px;
     height: 350px;
 
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 6fr 1fr;
+    grid-template-rows: 6fr 1fr;    
 }
 
-.game-box-art {
+.game-box-art img {
 
-    background-color: brown;
+    width: 250px;
+    height: 300px;
+
+    border: 2px solid rgb(211, 211, 211);
+    border-radius: 5px;
 }
 
 .game-title {
@@ -21,8 +25,9 @@
 .game-entry:hover {
 
     transform: translate(-2%, -2%);
-    width: 310px;
-    height: 360px;
-    position: absolute;
+    background-color: rgb(211, 211, 211);
+    border-radius: 10px;
+    padding: 5px;
+    position: relative;
     transition: 0.3s;
 }

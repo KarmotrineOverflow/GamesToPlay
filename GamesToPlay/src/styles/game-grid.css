@@ -15,13 +15,15 @@
 .game-grid {
 
     list-style: none;
+    width: 80%;
 
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 300px));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 250px));
     grid-template-rows: repeat(auto-fit, minmax(300px, 350px));
     grid-auto-flow: row;
 
     gap: 2rem;
+    margin: 25px auto auto auto;
 
     animation: game-grid-load-anim 0.8s forwards;
 }
