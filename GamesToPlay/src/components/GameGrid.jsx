@@ -12,7 +12,7 @@ export default function GameGrid(props) {
     var [gameModal, setGameModal] = useState("");
     var [gameDetails, setGameDetails] = useState({})
     var gameListType = props.gameListType
-    var gameData; 
+    var gameData = [];
 
     /* useEffect(() => async function () {
         setGameList(await gameData["games"].map(game => <li key={game.id} onClick={() => viewGameDetails(game.id)}>
@@ -26,46 +26,43 @@ export default function GameGrid(props) {
 
     useEffect(() => async () => {  
 
-        await fetchGameList()
-        //await displayGameList()
-     },
-        []
+        gameData = (await getGameList(gameListType))["games"]
+        await displayGameList()
+     }, []
     )
-
-    const fetchGameList = async function () {
-
-        gameData = await getGameList(gameListType)
-        console.log("TEST")
-    }
 
     const displayGameList = async function () {
 
-        for (var i = 0; i < gameData["games"].length; i++) {
+        for (var i = 0; i < gameData.length; i++) {
 
-            if (!gameData["games"][i]["box_art"]) {
+            if (!gameData[i]["box_art"]) {
 
-                var boxArtURL = await fetchGameBoxArt(gameData["games"][i]["title"]);
-                gameData["games"][i]["box_art"] = boxArtURL.image_url;
+                var boxArtURL = await fetchGameBoxArt(gameData[i]["title"]);
+                gameData[i]["box_art"] = boxArtURL.image_url;
 
                 // Update the box art URLs in the database for caching
-                updateGameDetails(gameListType, gameData["games"][i])
+                updateGameDetails(gameListType, gameData[i])
             }          
         }
 
-        setGameList(gameData["games"].map(game => <li key={game.id} onClick={() => viewGameDetails(game.id)}>
+        console.log(gameData)
+
+        setGameList(gameData.map(game => <li key={game.id} onClick={() => viewGameDetails(game.id - 1)}>
         <div className="game-entry">
             <div className="game-box-art"><img src={game.box_art} /></div>
             <div className="game-title">{game.title}</div>
         </div>
         </li>))
+
+        console.log(gameData)
     }
 
     const viewGameDetails = (gameId) => {
 
-        var gameTitle = gameData["games"][gameId].title;
-        var gameBoxArt = gameData["games"][gameId].box_art;
-        var gameDescription = gameData["games"][gameId].game_description;
-        var thoughts = gameData["games"][gameId].thoughts;
+        var gameTitle = gameData[gameId].title;
+        var gameBoxArt = gameData[gameId].box_art;
+        var gameDescription = gameData[gameId].game_description;
+        var thoughts = gameData[gameId].thoughts;
 
         setGameDetails({
             "title": gameTitle,

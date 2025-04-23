@@ -2,17 +2,15 @@ var backendBaseUrl = import.meta.env.VITE_APP_LOCAL_BACKEND_URL;
 
 export async function getGameList(gameType) {
 
-    return fetch(`/game/${gameType}`, {
+    return fetch(`${backendBaseUrl}/game/${gameType}`, {
         method: 'GET',
         headers: {'Content-Type': 'application/json'}
     })
-    .then(response => console.log(response.json()))
+    .then( response => response.json())
     .catch(err => { throw err })
 }
 
-export async function addGame(gameType, gameDetails) {
-
-    // TODO: Finish this functionality to switch to db connections instead of hard-coded JSON files
+export async function addGame(gameType, gameDetails) {    
 
     return fetch(`/game/${gameType}/add`, {
         method: 'POST',
