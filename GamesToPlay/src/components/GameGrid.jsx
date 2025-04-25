@@ -35,14 +35,14 @@ export default function GameGrid(props) {
 
         for (var i = 0; i < gameData.length; i++) {
 
-            if (!gameData[i]["box_art"]) {
+            /* if (!gameData[i]["box_art"]) {
 
                 var boxArtURL = await fetchGameBoxArt(gameData[i]["title"]);
                 gameData[i]["box_art"] = boxArtURL.image_url;
 
                 // Update the box art URLs in the database for caching
                 updateGameDetails(gameListType, gameData[i])
-            }          
+            }       */    
         }
 
         console.log(gameData)

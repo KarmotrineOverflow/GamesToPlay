@@ -2,6 +2,10 @@ import { useState } from "react"
 import PlayedGames from "../components/PlayedGames"
 import ToPlayGames from "../components/ToPlayGames"
 import About from "../components/About"
+import { createContext } from "react"
+
+// TODO: Create a context variable to keep track of the game list type (played or to play)
+// This will determine if the 'Mark As Played' button will appear in the modal
 
 export default function Dashboard() {
 

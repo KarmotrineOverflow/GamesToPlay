@@ -12,7 +12,7 @@ export async function getGameList(gameType) {
 
 export async function addGame(gameType, gameDetails) {    
 
-    return fetch(`/game/${gameType}/add`, {
+    return fetch(`${backendBaseUrl}/game/${gameType}/add`, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: gameDetails
@@ -23,7 +23,7 @@ export async function addGame(gameType, gameDetails) {
 
 export async function updateGameDetails(gameType, gameDetails) {
 
-    return fetch(`/game/${gameType}/update`, {
+    return fetch(`${backendBaseUrl}/game/${gameType}/update`, {
 
         method: 'PUT',
         headers: {'Content-Type': 'application/json'},
@@ -35,7 +35,7 @@ export async function updateGameDetails(gameType, gameDetails) {
 
 export async function deleteGame(gameType, gameTitle) {
 
-    return fetch(`/game/${gameType}/delete?${new URLSearchParams({gameTitle: gameTitle})}`, 
+    return fetch(`${backendBaseUrl}/game/${gameType}/delete?${new URLSearchParams({gameTitle: gameTitle})}`, 
     {
         method: 'DELETE',
         headers: {'Content-Type': 'application/json'}
@@ -46,7 +46,7 @@ export async function deleteGame(gameType, gameTitle) {
 
 export async function markGameAsPlayed(gameTitle) {
 
-    return fetch(`/game/mark-as-played?${new URLSearchParams({gameTitle: gameTitle})}`, 
+    return fetch(`${backendBaseUrl}/game/mark-as-played?${new URLSearchParams({gameTitle: gameTitle})}`, 
     {
         method: 'PUT',
         headers: {'Content-Type': 'application/json'},
