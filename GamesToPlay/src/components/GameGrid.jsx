@@ -1,9 +1,10 @@
 import '../styles/game-entry.css'
 import '../styles/game-grid.css'
 import { useEffect, useState } from "react";
-import GameModal from './GameModal';
+import Modal from './Modal';
 import { fetchGameBoxArt } from '../scripts/image_services';
 import { getGameList, updateGameDetails } from '../scripts/game_list_services';
+import GameModal from './GameModal';
 
 export default function GameGrid(props) {
 
@@ -76,7 +77,7 @@ export default function GameGrid(props) {
                 {gameList.length == 0 ? <h1>Loading</h1> : gameList}
             </ul>
 
-            <GameModal isOpen={isOpen} onClose={() => { setIsOpen(false) }} gameDetails={gameDetails} />
+            <Modal isOpen={isOpen} onClose={() => { setIsOpen(false) }} component={<GameModal gameDetails={gameDetails}/>} />
 
         {/* 
             

@@ -6,9 +6,7 @@ import { useRef } from 'react';
 import { updateGameDetails } from '../scripts/game_list_services';
 import tableContext from './TableContext';
 
-export default function GameModal({isOpen, onClose, gameDetails}) {
-
-    if (!isOpen) return null;
+export default function GameModal({gameDetails}) {
 
     const [inEdit, setInEdit] = useState(false)
     const [details, setDetails] = useState(gameDetails)
@@ -43,61 +41,49 @@ export default function GameModal({isOpen, onClose, gameDetails}) {
         thoughts.current = details.thoughts
     }
 
-    return ReactDom.createPortal(        
-        <div className="modal-overlay">
-            <div className="modal-container">
-                <div className="modal-style">                
-                    <div className="modal-header">                    
-                        <div className="exit-btn" onClick={onClose}><p>X</p></div>
-                    </div> 
-                    <div className="modal-content-container">
+    return (        
+        <>
+            <div className="modal-left-item">
+                <figure>
+                    <img src={gameDetails.box_art} />
+                    <figcaption>Game box art</figcaption>
+                </figure>
+            </div>
 
-                        <div className="modal-left-item">
-                            <figure>
-                                <img src={gameDetails.box_art} />
-                                <figcaption>Game box art</figcaption>
-                            </figure>
+            <div className="modal-right-item">
+
+                {/* TODO: Add a condition here to display a textfield if edit is toggled and headings if not */}
+                {(inEdit) ?
+                
+                        <div className="modal-edit">
+                        <label>Title</label>
+                        <input className="title-textfield" type="text" defaultValue={title.current} onChange={(e) => {title.current = e.target.value}}/> 
+
+                        <label>Game Description</label>
+                        <textarea onChange={(e) => {gameDescription.current = e.target.value}} defaultValue={gameDescription.current}/> 
+
+                        <label>Thoughts</label>
+                        <textarea onChange={(e) => {thoughts.current = e.target.value}} defaultValue={thoughts.current}/>
+                        
+                        <div className="modal-btns">
+                            <button className="edit-details" onClick={() => {saveDetailChanges; setInEdit(false)}}>Save Changes</button>
+                            <button className="mark-as-played" onClick={() => {discardTextfieldChanges(); setInEdit(!inEdit)}}>Cancel</button>
                         </div>
+                    </div>
+                    : <>
+                        <h2>{title.current}</h2>
+                        <p>{gameDescription.current}</p>
 
-                        <div className="modal-right-item">
+                        <h3><i>My thoughts</i></h3>
+                        <p>{thoughts.current}</p>
 
-                            {/* TODO: Add a condition here to display a textfield if edit is toggled and headings if not */}
-                            {(inEdit) ?
-                            
-                                    <div className="modal-edit">
-                                    <label>Title</label>
-                                    <input className="title-textfield" type="text" defaultValue={title.current} onChange={(e) => {title.current = e.target.value}}/> 
-
-                                    <label>Game Description</label>
-                                    <textarea onChange={(e) => {gameDescription.current = e.target.value}} defaultValue={gameDescription.current}/> 
-
-                                    <label>Thoughts</label>
-                                    <textarea onChange={(e) => {thoughts.current = e.target.value}} defaultValue={thoughts.current}/>
-                                    
-                                    <div className="modal-btns">
-                                        <button className="edit-details" onClick={() => {saveDetailChanges; setInEdit(false)}}>Save Changes</button>
-                                        <button className="mark-as-played" onClick={() => {discardTextfieldChanges(); setInEdit(!inEdit)}}>Cancel</button>
-                                    </div>
-                                </div>
-                                : <>
-                                    <h2>{title.current}</h2>
-                                    <p>{gameDescription.current}</p>
-
-                                    <h3><i>My thoughts</i></h3>
-                                    <p>{thoughts.current}</p>
-
-                                    <div className="modal-btns">
-                                        <button className="edit-details" onClick={() => {setInEdit(!inEdit)}}>Edit Details</button>
-                                        <button className="mark-as-played">Mark As Played</button>
-                                    </div>
-                                </>
-                                }                                                                    
+                        <div className="modal-btns">
+                            <button className="edit-details" onClick={() => {setInEdit(!inEdit)}}>Edit Details</button>
+                            <button className="mark-as-played">Mark As Played</button>
                         </div>
-
-                    </div>                               
-                </div>
-        </div>
-    </div>,
-        document.getElementById('modal')
+                    </>
+                    }                                                                    
+            </div>
+        </>
     )
 }
