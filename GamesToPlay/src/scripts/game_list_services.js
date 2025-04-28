@@ -21,13 +21,14 @@ export async function addGame(gameType, gameDetails) {
     .catch(err => { throw err })
 }
 
-export async function updateGameDetails(gameType, gameDetails) {
+export async function updateGameDetails(gameType, gameDetails) {    
 
     return fetch(`${backendBaseUrl}/game/${gameType}/update`, {
-
         method: 'PUT',
-        headers: {'Content-Type': 'application/json'},
-        body: gameDetails
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({"game_details": gameDetails})
     })
     .then(response => response.json())
     .catch(err => { throw err })

@@ -35,17 +35,15 @@ export default function GameGrid(props) {
 
         for (var i = 0; i < gameData.length; i++) {
 
-            /* if (!gameData[i]["box_art"]) {
+            if (!gameData[i]["box_art"]) {
 
                 var boxArtURL = await fetchGameBoxArt(gameData[i]["title"]);
                 gameData[i]["box_art"] = boxArtURL.image_url;
 
                 // Update the box art URLs in the database for caching
                 updateGameDetails(gameListType, gameData[i])
-            }       */    
+            }          
         }
-
-        console.log(gameData)
 
         setGameList(gameData.map(game => <li key={game.id} onClick={() => viewGameDetails(game.id - 1)}>
         <div className="game-entry">
@@ -53,8 +51,6 @@ export default function GameGrid(props) {
             <div className="game-title">{game.title}</div>
         </div>
         </li>))
-
-        console.log(gameData)
     }
 
     const viewGameDetails = (gameId) => {

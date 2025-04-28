@@ -1,9 +1,10 @@
 import ReactDom from 'react-dom'
 import '../styles/modal-overlay.css'
 import '../styles/modal-style.css'
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useRef } from 'react';
 import { updateGameDetails } from '../scripts/game_list_services';
+import tableContext from './TableContext';
 
 export default function GameModal({isOpen, onClose, gameDetails}) {
 
@@ -11,6 +12,9 @@ export default function GameModal({isOpen, onClose, gameDetails}) {
 
     const [inEdit, setInEdit] = useState(false)
     const [details, setDetails] = useState(gameDetails)
+
+    const tableType = useContext(tableContext)
+    console.log(tableType)
 
     const title = useRef(details.title)
     const gameDescription = useRef(details.desc)
@@ -26,7 +30,7 @@ export default function GameModal({isOpen, onClose, gameDetails}) {
             thoughts: thoughts.current
         }
 
-        // Have to get the context for which table is used first
+        // Have to get the context for which table is used first. UPDATE: WORKING!!
         //updateGameDetails()
 
         setDetails(newGameDetails)
