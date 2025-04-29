@@ -12,7 +12,6 @@ export default function GameModal({gameDetails}) {
     const [details, setDetails] = useState(gameDetails)
 
     const tableType = useContext(tableContext)
-    console.log(tableType)
 
     const title = useRef(details.title)
     const gameDescription = useRef(details.desc)
@@ -20,17 +19,14 @@ export default function GameModal({gameDetails}) {
 
     const saveDetailChanges = () => {
 
-        console.log("called")
-
         var newGameDetails = {
+            id: details.id,
             title: title.current,
             desc: gameDescription.current,
             thoughts: thoughts.current
         }
 
-        // Have to get the context for which table is used first. UPDATE: WORKING!!
-        //updateGameDetails()
-
+        updateGameDetails(tableType, newGameDetails)
         setDetails(newGameDetails)
     }
 
@@ -66,7 +62,7 @@ export default function GameModal({gameDetails}) {
                         <textarea onChange={(e) => {thoughts.current = e.target.value}} defaultValue={thoughts.current}/>
                         
                         <div className="modal-btns">
-                            <button className="edit-details" onClick={() => {saveDetailChanges; setInEdit(false)}}>Save Changes</button>
+                            <button className="edit-details" onClick={() => {saveDetailChanges(); setInEdit(false)}}>Save Changes</button>
                             <button className="mark-as-played" onClick={() => {discardTextfieldChanges(); setInEdit(!inEdit)}}>Cancel</button>
                         </div>
                     </div>
@@ -79,7 +75,7 @@ export default function GameModal({gameDetails}) {
 
                         <div className="modal-btns">
                             <button className="edit-details" onClick={() => {setInEdit(!inEdit)}}>Edit Details</button>
-                            <button className="mark-as-played">Mark As Played</button>
+                            {(tableType == "toplaygames") && <button className="mark-as-played">Mark As Played</button>}                            
                         </div>
                     </>
                     }                                                                    

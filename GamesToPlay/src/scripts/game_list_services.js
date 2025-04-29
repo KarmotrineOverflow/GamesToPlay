@@ -15,7 +15,7 @@ export async function addGame(gameType, gameDetails) {
     return fetch(`${backendBaseUrl}/game/${gameType}/add`, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
-        body: gameDetails
+        body: JSON.stringify({"game_details": gameDetails})
     })
     .then(response => response.json())
     .catch(err => { throw err })

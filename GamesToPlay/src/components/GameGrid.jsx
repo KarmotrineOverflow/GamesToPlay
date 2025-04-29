@@ -28,15 +28,17 @@ export default function GameGrid(props) {
     useEffect(() => async () => {  
 
         gameData = (await getGameList(gameListType))["games"]
+
         await displayGameList()
      }, []
     )
 
     const displayGameList = async function () {
 
+        // This for loop ensures the scraping of the game's boxart if none is found
         for (var i = 0; i < gameData.length; i++) {
 
-            if (!gameData[i]["box_art"]) {
+            if (!gameData[i]["box_art"] || gameData[i]["box_art"] == "undefined") {
 
                 var boxArtURL = await fetchGameBoxArt(gameData[i]["title"]);
                 gameData[i]["box_art"] = boxArtURL.image_url;
@@ -46,7 +48,9 @@ export default function GameGrid(props) {
             }          
         }
 
-        setGameList(gameData.map(game => <li key={game.id} onClick={() => viewGameDetails(game.id - 1)}>
+        // TODO: The gap in MySQL's AUTO INCREMENT when an item is deleted messes up the fetching of data from the array
+        // We can just reset the increment in MySQL because the ID won't adjust for items with IDs that are greater than the deleted one's
+        setGameList(gameData.map(game => <li key={game.id} onClick={() => viewGameDetails(game)}>
         <div className="game-entry">
             <div className="game-box-art"><img src={game.box_art} /></div>
             <div className="game-title">{game.title}</div>
@@ -54,16 +58,18 @@ export default function GameGrid(props) {
         </li>))
     }
 
-    const viewGameDetails = (gameId) => {
+    const viewGameDetails = (game) => {
 
-        var gameTitle = gameData[gameId].title;
-        var gameBoxArt = gameData[gameId].box_art;
-        var gameDescription = gameData[gameId].game_description;
-        var thoughts = gameData[gameId].thoughts;
+        var gameId = game.id
+        var gameTitle = game.title;
+        var gameBoxArt = game.box_art;
+        var gameDescription = game.game_description;
+        var thoughts = game.thoughts;
 
         setGameDetails({
+            "id": gameId,
             "title": gameTitle,
-            "desc": gameDescription,
+            "game_description": gameDescription,
             "thoughts": thoughts,
             "box_art": gameBoxArt
         });
