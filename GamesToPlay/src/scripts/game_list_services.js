@@ -34,9 +34,9 @@ export async function updateGameDetails(gameType, gameDetails) {
     .catch(err => { throw err })
 }
 
-export async function deleteGame(gameType, gameTitle) {
+export async function deleteGame(gameType, gameId) {
 
-    return fetch(`${backendBaseUrl}/game/${gameType}/delete?${new URLSearchParams({gameTitle: gameTitle})}`, 
+    return fetch(`${backendBaseUrl}/game/${gameType}/delete?${new URLSearchParams({game_id: gameId})}`, 
     {
         method: 'DELETE',
         headers: {'Content-Type': 'application/json'}

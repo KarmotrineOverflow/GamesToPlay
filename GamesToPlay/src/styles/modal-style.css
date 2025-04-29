@@ -112,6 +112,17 @@
     padding: 8px;
 
     color: white;
+    background-color: rgb(190, 123, 0);
+
+    border: 0px;
+    border-radius: 8px;
+}
+
+.delete-entry {
+
+    padding: 8px;
+
+    color: white;
     background-color: rgb(160, 14, 14);
 
     border: 0px;

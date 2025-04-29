@@ -3,8 +3,9 @@ import '../styles/modal-overlay.css'
 import '../styles/modal-style.css'
 import { useContext, useState } from 'react';
 import { useRef } from 'react';
-import { updateGameDetails } from '../scripts/game_list_services';
-import tableContext from './TableContext';
+import { addGame, deleteGame, updateGameDetails } from '../scripts/game_list_services';
+import tableContext from '../context/TableContext';
+import modalContext from '../context/ModalContext';
 
 export default function GameModal({gameDetails}) {
 
@@ -12,9 +13,10 @@ export default function GameModal({gameDetails}) {
     const [details, setDetails] = useState(gameDetails)
 
     const tableType = useContext(tableContext)
+    const modalState = useContext(modalContext)
 
     const title = useRef(details.title)
-    const gameDescription = useRef(details.desc)
+    const gameDescription = useRef(details.game_description)
     const thoughts = useRef(details.thoughts)
 
     const saveDetailChanges = () => {
@@ -22,7 +24,7 @@ export default function GameModal({gameDetails}) {
         var newGameDetails = {
             id: details.id,
             title: title.current,
-            desc: gameDescription.current,
+            game_description: gameDescription.current,
             thoughts: thoughts.current
         }
 
@@ -30,11 +32,24 @@ export default function GameModal({gameDetails}) {
         setDetails(newGameDetails)
     }
 
+    const markAsPlayed = async () => {
+
+        await addGame("playedgames", details)
+        await deleteGame(tableType, details.id)
+
+        modalState()
+    }
+
     const discardTextfieldChanges = () => {
 
         title.current = details.title
         gameDescription.current = details.desc
         thoughts.current = details.thoughts
+    }
+
+    const deleteGameEntry = async () => {
+
+        await deleteGame(tableType, details.id)
     }
 
     return (        
@@ -63,7 +78,7 @@ export default function GameModal({gameDetails}) {
                         
                         <div className="modal-btns">
                             <button className="edit-details" onClick={() => {saveDetailChanges(); setInEdit(false)}}>Save Changes</button>
-                            <button className="mark-as-played" onClick={() => {discardTextfieldChanges(); setInEdit(!inEdit)}}>Cancel</button>
+                            <button className="delete-entry" onClick={() => {discardTextfieldChanges(); setInEdit(!inEdit)}}>Cancel</button>
                         </div>
                     </div>
                     : <>
@@ -75,7 +90,8 @@ export default function GameModal({gameDetails}) {
 
                         <div className="modal-btns">
                             <button className="edit-details" onClick={() => {setInEdit(!inEdit)}}>Edit Details</button>
-                            {(tableType == "toplaygames") && <button className="mark-as-played">Mark As Played</button>}                            
+                            {(tableType == "toplaygames") && <button className="mark-as-played" onClick={() => markAsPlayed()}>Mark As Played</button>}                            
+                            <button className="delete-entry" onClick={() => { deleteGameEntry() }}>Delete Entry</button>
                         </div>
                     </>
                     }                                                                    
