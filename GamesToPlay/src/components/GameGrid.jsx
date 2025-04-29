@@ -10,7 +10,6 @@ export default function GameGrid(props) {
 
     var [isOpen, setIsOpen] = useState(false);
     var [gameList, setGameList] = useState([]);
-    var [gameModal, setGameModal] = useState("");
     var [gameDetails, setGameDetails] = useState({})
     var gameListType = props.gameListType
     var gameData = [];
@@ -75,9 +74,22 @@ export default function GameGrid(props) {
         setIsOpen(true);
     }
 
-    const deleteGameEntry = () => {
+    const deleteGameEntry = (gameId) => {
 
+        var gameIndex = null
+        var newGameList = gameList
 
+        for (var game of gameList) {
+
+            if (gameId == game.key) {
+
+                gameIndex = gameList.indexOf(game)
+                break
+            }
+        }
+
+        newGameList.splice(gameIndex, 1)
+        setGameList(newGameList)
     }
 
     return (
@@ -86,7 +98,7 @@ export default function GameGrid(props) {
                 {gameList.length == 0 ? <h1>Loading</h1> : gameList}
             </ul>
 
-            <Modal isOpen={isOpen} onClose={() => { setIsOpen(false) }} component={<GameModal gameDetails={gameDetails}/>} />
+            <Modal isOpen={isOpen} onClose={() => { setIsOpen(false) }} component={<GameModal gameDetails={gameDetails} onRemove={(gameId) => deleteGameEntry(gameId)}/>} />
 
         {/* 
             

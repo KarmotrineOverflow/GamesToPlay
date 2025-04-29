@@ -1,0 +1,18 @@
+.add-toast {
+
+    padding: 0px 25px 0px 25px;
+
+    border-radius: 150px;    
+    border: 0;
+
+    position: fixed;
+    right: 5%;
+    bottom: 5%;
+
+    z-index: 10;
+
+    background-color: green;
+    color: white;
+
+    font-size: large;
+}   

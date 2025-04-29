@@ -7,7 +7,7 @@ import { addGame, deleteGame, updateGameDetails } from '../scripts/game_list_ser
 import tableContext from '../context/TableContext';
 import modalContext from '../context/ModalContext';
 
-export default function GameModal({gameDetails}) {
+export default function GameModal({gameDetails, onRemove}) {
 
     const [inEdit, setInEdit] = useState(false)
     const [details, setDetails] = useState(gameDetails)
@@ -50,6 +50,8 @@ export default function GameModal({gameDetails}) {
     const deleteGameEntry = async () => {
 
         await deleteGame(tableType, details.id)
+        onRemove(details.id)
+        modalState()
     }
 
     return (        
