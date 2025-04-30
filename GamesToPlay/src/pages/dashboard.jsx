@@ -16,7 +16,7 @@ export default function Dashboard() {
     return(
         <tableContext.Provider value={tableType}>
             <header>
-                <h1>Games To Play</h1>
+                <h1>GamesToPlay</h1>
                 
                 <ul>
                     <li><button onClick={() => {setPage(<ToPlayGames />); setTableType("toplaygames")}}>To Play</button></li>

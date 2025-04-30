@@ -1,3 +1,13 @@
+@font-face {
+  font-family: "GamesToPlay";
+  src: url('./fonts/Cute Notes.ttf');
+}
+
+@font-face {
+  font-family: "RegularFont";
+  src: url('./fonts/Gobold Regular.otf');
+}
+
 #root, html, body {
 
   margin: auto;
@@ -7,12 +17,24 @@
 
 header {
 
-  background-color: wheat;
+  background-color: #1E201E;
 
   display: flex;
   padding: 5px 80px 5px 50px;  
 
   justify-content: space-between;
+
+  color: whitesmoke;
+}
+
+h1, h2, h3 {
+
+  font-family: 'RegularFont';
+}
+
+header h1 {
+
+  font-family: "GamesToPlay";
 }
 
 header ul {
@@ -31,5 +53,9 @@ header ul li button {
   border: 0px;
   background-color: transparent;
 
+  font-family: 'RegularFont';
+
   margin-top: 10px;
+
+  color: whitesmoke;
 }

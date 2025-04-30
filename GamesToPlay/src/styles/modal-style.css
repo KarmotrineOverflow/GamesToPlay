@@ -23,7 +23,7 @@
 
 .modal-header {
 
-    background-color: rgb(178, 178, 178);
+    background-color: #3C3D37;    
     border-radius: 10px 10px 0px 0px;
 
     display: flex;
@@ -78,9 +78,9 @@
 
 .exit-btn {
 
-    background-color: rgb(160, 14, 14);
+    background-color: rgb(113, 11, 11);
 
-    width: 50px;
+    width: 50px;    
     height: 30px;
 
     border-radius: 0px 10px 0px 00px;
@@ -101,7 +101,7 @@
     padding: 8px;
 
     color: white;
-    background-color: rgb(23, 133, 23);
+    background-color: rgb(19, 106, 19);
 
     border: 0px;
     border-radius: 8px;
@@ -112,7 +112,7 @@
     padding: 8px;
 
     color: white;
-    background-color: rgb(190, 123, 0);
+    background-color: rgb(151, 98, 0);
 
     border: 0px;
     border-radius: 8px;
@@ -123,7 +123,7 @@
     padding: 8px;
 
     color: white;
-    background-color: rgb(160, 14, 14);
+    background-color: rgb(115, 10, 10);
 
     border: 0px;
     border-radius: 8px;

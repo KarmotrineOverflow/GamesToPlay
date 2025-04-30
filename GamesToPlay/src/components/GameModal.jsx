@@ -19,6 +19,7 @@ export default function GameModal({gameDetails, onRemove}) {
     const gameDescription = useRef(details.game_description)
     const thoughts = useRef(details.thoughts)
 
+    // FIXME: The changes do not take effect until the page is reloaded
     const saveDetailChanges = () => {
 
         var newGameDetails = {
@@ -36,6 +37,7 @@ export default function GameModal({gameDetails, onRemove}) {
 
         await addGame("playedgames", details)
         await deleteGame(tableType, details.id)
+        onRemove(details.id)
 
         modalState()
     }
@@ -64,8 +66,7 @@ export default function GameModal({gameDetails, onRemove}) {
             </div>
 
             <div className="modal-right-item">
-
-                {/* TODO: Add a condition here to display a textfield if edit is toggled and headings if not */}
+                
                 {(inEdit) ?
                 
                         <div className="modal-edit">
